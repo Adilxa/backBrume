@@ -5,42 +5,25 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSpecs from "./swagger.js";
 import routes from "./src/routes/index.js";
 
-dotenv.config();
-
 const corsOptions = {
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      // Development
-      "http://localhost:3000",
-      "http://localhost:3001",
-      "http://localhost:4200",
-      "http://localhost:8080",
-      "http://localhost:5000",
-      "http://localhost:8000",
-      "http://127.0.0.1:3000",
-      "http://127.0.0.1:3001",
+  origin: [
+    "http://localhost:3000", // React default
+    "http://localhost:3001",
+    "http://localhost:4200", // Angular default
+    "http://localhost:8080", // Vue default
 
-      // Production - убрал слэш в конце!
-      "https://brume-c1pk-5j2nxjppu-adilxas-projects.vercel.app",
-      "https://brume-c1pk-5j2nxjppu-adilxas-projects.vercel.app/",
-      // Добавляем IP адрес вашего сервера
-      "http://84.54.12.45:5000",
-      "https://84.54.12.45:5000",
+    // Backend порты для тестирования
+    "http://localhost:5000",
+    "http://localhost:8000",
 
-      "https://yourapp.com",
-      "https://api.yourapp.com",
-    ];
+    // Альтернативные хосты
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:3001",
 
-    // Разрешаем запросы без origin (например, мобильные приложения, Postman)
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.log("CORS Error: Origin not allowed:", origin);
-      callback(new Error(`CORS Error: Origin ${origin} not allowed`));
-    }
-  },
+    // Продакшен домены
+    "https://yourapp.com",
+    "https://api.yourapp.com",
+  ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
   allowedHeaders: [
     "Origin",
@@ -49,21 +32,17 @@ const corsOptions = {
     "Accept",
     "Authorization",
     "Cache-Control",
-    "Access-Control-Allow-Origin",
   ],
   credentials: true,
-  optionsSuccessStatus: 200,
-  preflightContinue: false,
+  optionsSuccessStatus: 200, // для поддержки старых браузеров
 };
+
+dotenv.config();
 
 const app = express();
 
-// ВАЖНО: Порядок middleware имеет значение!
-app.use(cors(corsOptions));
 app.use(express.json());
-
-// Добавляем обработку preflight запросов
-app.options("*", cors(corsOptions));
+app.use(cors(corsOptions));
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
