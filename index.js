@@ -22,7 +22,7 @@ const corsOptions = {
 
       // Production - убрал слэш в конце!
       "https://brume-c1pk-5j2nxjppu-adilxas-projects.vercel.app",
-
+      "https://brume-c1pk-5j2nxjppu-adilxas-projects.vercel.app/",
       // Добавляем IP адрес вашего сервера
       "http://84.54.12.45:5000",
       "https://84.54.12.45:5000",
