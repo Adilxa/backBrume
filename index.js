@@ -23,7 +23,7 @@ const corsOptions = {
     // Продакшен домены
     "https://yourapp.com",
     "https://api.yourapp.com",
-    "https://brume-c1pk-5j2nxjppu-adilxas-projects.vercel.app/",
+    "https://brume-c1pk-5j2nxjppu-adilxas-projects.vercel.app",
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
   allowedHeaders: [
