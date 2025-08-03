@@ -1,4 +1,6 @@
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
 
 class MailService {
   constructor() {
@@ -13,7 +15,7 @@ class MailService {
     });
   }
 
-  async sendActivationMail( user_id, to, subject, message) {
+  async sendActivationMail(user_id, to, subject, message) {
     await this.transporter.sendMail({
       from: process.env.SMTP_USER,
       to,
