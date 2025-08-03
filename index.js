@@ -47,27 +47,13 @@ app.use(cors(corsOptions));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 app.get("/", (req, res) => {
-  res.json({ message: "Hello world", timestamp: new Date().toISOString() });
+  return res.send("Hello world");
 });
 
 app.use(routes);
-
-// Глобальный обработчик ошибок
-app.use((err, req, res, next) => {
-  console.error("Error:", err.message);
-  if (err.message.includes("CORS")) {
-    return res.status(403).json({
-      error: "CORS Error",
-      message: err.message,
-      origin: req.headers.origin,
-    });
-  }
-  res.status(500).json({ error: "Internal Server Error" });
-});
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  console.log(`CORS enabled for origins:`, corsOptions.origin);
 });
