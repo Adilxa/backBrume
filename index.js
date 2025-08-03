@@ -6,25 +6,7 @@ import swaggerSpecs from "./swagger.js";
 import routes from "./src/routes/index.js";
 
 const corsOptions = {
-  origin: [
-    "http://localhost:3000", // React default
-    "http://localhost:3001",
-    "http://localhost:4200", // Angular default
-    "http://localhost:8080", // Vue default
-
-    // Backend порты для тестирования
-    "http://localhost:5000",
-    "http://localhost:8000",
-
-    // Альтернативные хосты
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:3001",
-
-    // Продакшен домены
-    "https://yourapp.com",
-    "https://api.yourapp.com",
-    "https://brume-c1pk-5j2nxjppu-adilxas-projects.vercel.app",
-  ],
+  origin: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
   allowedHeaders: [
     "Origin",
