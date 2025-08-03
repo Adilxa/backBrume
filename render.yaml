@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: shopserver
+    env: node
+    buildCommand: |
+      npm install
+      npm run seed
+      npx prisma generate
+      npx prisma migrate deploy
+
+    startCommand: node src/index.js
+    envVars:
+      - key: DATABASE_URL
+        value: "postgresql://mydb_kxnr_user:H1W61ZqDyUNMBNcxSvW859L9C1HUd78Z@dpg-ct1j1223esus73d0qcr0-a.oregon-postgres.render.com/mydb_kxnr"
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: 587
+      - key: SMTP_USER
+        value: adilhanimerov82@gmail.com
+      - key: SMTP_PASSWORD
+        sync: false
