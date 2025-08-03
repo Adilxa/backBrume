@@ -7,17 +7,7 @@ import routes from "./src/routes/index.js";
 
 const corsOptions = {
   origin: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-  allowedHeaders: [
-    "Origin",
-    "X-Requested-With",
-    "Content-Type",
-    "Accept",
-    "Authorization",
-    "Cache-Control",
-  ],
   credentials: true,
-  optionsSuccessStatus: 200, // для поддержки старых браузеров
 };
 
 dotenv.config();
