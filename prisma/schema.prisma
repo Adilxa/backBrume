@@ -12,21 +12,37 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
-  createdAt DateTime  @default(now()) @map("created_at")
-  cups      Cup[]
-  otpCodes  OtpCode[]
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  createdAt    DateTime      @default(now()) @map("created_at")
+  cups         Cup[]         // Старые чашки (сохраняем для совместимости)
+  otpCodes     OtpCode[]     // Сохраняем как есть
+  loyaltyCards LoyaltyCard[] // Новые карточки лояльности
 
   @@map("users")
 }
 
-model Cup {
-  id        Int      @id @default(autoincrement())
-  userId    Int      @map("user_id")
-  createdAt DateTime @default(now()) @map("created_at")
+model LoyaltyCard {
+  id        Int       @id @default(autoincrement())
+  userId    Int       @map("user_id")
+  isUsed    Boolean   @default(false) @map("is_used")
+  usedAt    DateTime? @map("used_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  cups      Cup[]     @relation("LoyaltyCardCups")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("loyalty_cards")
+}
+
+model Cup {
+  id             Int          @id @default(autoincrement())
+  userId         Int?         @map("user_id") // Делаем опциональным для старых записей
+  loyaltyCardId  Int?         @map("loyalty_card_id") // Новое поле для карточек
+  createdAt      DateTime     @default(now()) @map("created_at")
+
+  user         User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  loyaltyCard  LoyaltyCard?  @relation("LoyaltyCardCups", fields: [loyaltyCardId], references: [id], onDelete: Cascade)
 
   @@map("cups")
 }

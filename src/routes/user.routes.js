@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getMe, addCup } from "../controllers/user.controller.js";
+import { getMe, addCup, claimFreeCoffee } from "../controllers/user.controller.js";
 
 const router = Router();
 
@@ -107,5 +107,6 @@ router.get("/:id", getMe);
  *         description: Ошибка сервера
  */
 router.post("/:id/add-cup", addCup);
+router.post("/:id/claim-coffee", claimFreeCoffee);
 
 export default router;
