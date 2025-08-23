@@ -9,7 +9,7 @@
     "postinstall": "prisma generate",
     "build": "prisma generate",
     "dev": "prisma generate && nodemon src/index.js ",
-    "start": "node src/index.js",
+    "start": "node index.js",
     "migrate:deploy": "prisma migrate deploy"
   },
   "engines": {
