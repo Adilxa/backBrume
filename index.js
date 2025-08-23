@@ -46,7 +46,7 @@ app.use(cors(corsOptions));
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   return res.send("Hello world");
 });
 
