@@ -4,8 +4,8 @@ import UserRouter from "./user.routes.js";
 import AuthRouter from "./auth.routes.js";
 const router = Router();
 
-router.use("/api/email", EmailRouter);
-router.use("/api/user", UserRouter);
-router.use("/api/auth", AuthRouter);
+router.use("/email", EmailRouter);
+router.use("/user", UserRouter);
+router.use("/auth", AuthRouter);
 
 export default router;
