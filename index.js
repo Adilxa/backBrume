@@ -15,12 +15,8 @@ const corsOptions = {
     "http://localhost:8000",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:3001",
-
-    // Обновите продакшен домены - уберите слеши в конце
     "https://brume.kg",
     "https://admin.brume.kg",
-
-    // Добавьте HTTP версии для продакшена (если нужны)
     "http://brume.kg",
     "http://admin.brume.kg",
   ],
@@ -32,17 +28,24 @@ const corsOptions = {
     "Accept",
     "Authorization",
     "Cache-Control",
+    "X-Real-IP",
+    "X-Forwarded-For",
+    "X-Forwarded-Proto",
   ],
   credentials: true,
   optionsSuccessStatus: 200,
+  preflightContinue: false, // добавьте это
 };
 
 dotenv.config();
 
+app.use(cors(corsOptions));
+
+app.options("*", cors(corsOptions));
+
 const app = express();
 
 app.use(express.json());
-app.use(cors(corsOptions));
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
