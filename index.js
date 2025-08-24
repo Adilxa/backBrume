@@ -21,8 +21,8 @@ const corsOptions = {
     "http://127.0.0.1:3001",
 
     // Продакшен домены
-    "https://yourapp.com",
-    "https://api.yourapp.com",
+    "https://brume.kg/",
+    "https://admin.brume.kg/",
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
   allowedHeaders: [
