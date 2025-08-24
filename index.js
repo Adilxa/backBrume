@@ -1,22 +1,18 @@
 import express from "express";
-import cors from "cors";
 import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpecs from "./swagger.js";
 import routes from "./src/routes/index.js";
-
-const corsOptions = {
-  origin: true, // Разрешить все origins
-  credentials: true,
-  optionsSuccessStatus: 200,
-};
 
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
-app.use(cors(corsOptions));
+
+// Убираем все CORS настройки из Express!
+// app.use(cors(corsOptions)); // УДАЛИТЬ
+// Остальные CORS middleware тоже удалить
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
@@ -26,7 +22,7 @@ app.get("/api", (req, res) => {
 
 app.use(routes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
